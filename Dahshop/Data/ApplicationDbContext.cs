@@ -12,7 +12,7 @@ namespace Dahshop.Data
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){}
         
-        // create set of customers
-        public DbSet<Customer> Customers { get; set; }
+        // create set of users
+        public DbSet<AppUser> AppUsers { get; set; }
     }
 }
