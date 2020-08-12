@@ -41,10 +41,10 @@ namespace Dahshop.Models
             Sold
         }
         
-        // Item description
-        //public string ItemColor { get; set; }
+        // Item color
+        public string ItemColor { get; set; }
         
-        
+        /*
         // User who orders the item
         #if NETCOREAPP
         [NotMapped]
@@ -52,6 +52,7 @@ namespace Dahshop.Models
         public AppUser AppUser { get; set; }
         
         public int CustomerId { get; set; }
-
+        */
+        
     }
 }
