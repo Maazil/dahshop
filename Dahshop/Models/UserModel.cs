@@ -6,7 +6,7 @@ namespace Dahshop.Models
 {
     
     /// <summary>
-    /// Create user data
+    /// Create user data and table
     /// </summary>
     #if NETCOREAPP
     [Table("Users")]

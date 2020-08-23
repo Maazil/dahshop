@@ -66,15 +66,6 @@ namespace Dahshop.Data
                     
                     new AppUser
                     {
-                        FirstName = "Matthew", LastName = "Ling", PhoneNumber = "41378793",
-                        Email = "matthew.ling98@gmail.com", DeliveryPostAddress = "Øygardsåsen 2A", 
-                        DeliveryPostNumber = "4848", DeliveryPostPlace = "Arendal", ItemSoldCount = 0,
-                        FollowerCount = 0, FollowingCount = 0
-                    }, 
-                    
-                    
-                    new AppUser
-                    {
                         FirstName = "Dah Dah", LastName = "Ry", PhoneNumber = "41272567",
                         Email = "dahdahry@gmail.com", DeliveryPostAddress = "Svegeveien 2A", 
                         DeliveryPostNumber = "4400", DeliveryPostPlace = "Flekkefjord", ItemSoldCount = 0,
@@ -87,24 +78,8 @@ namespace Dahshop.Data
                         Email = "liishi@gmail.com", DeliveryPostAddress = "Innersvingen 5", 
                         DeliveryPostNumber = "4289", DeliveryPostPlace = "Froland", ItemSoldCount = 0,
                         FollowerCount = 0, FollowingCount = 0
-                    }, 
-                    
-                    new AppUser
-                    {
-                        FirstName = "Marcus", LastName = "Finn", PhoneNumber = "92156672",
-                        Email = "marcusfinn@gmail.com", DeliveryPostAddress = "Olaveien 17b", 
-                        DeliveryPostNumber = "0010", DeliveryPostPlace = "Oslo", ItemSoldCount = 0,
-                        FollowerCount = 0, FollowingCount = 0
-                    }, 
-                    
-                    new AppUser
-                    {
-                        FirstName = "David", LastName = "Trangen", PhoneNumber = "44377794",
-                        Email = "dtrangen@yahoo.com", DeliveryPostAddress = "Jupiterveien 4", 
-                        DeliveryPostNumber = "4005", DeliveryPostPlace = "Stavanger", ItemSoldCount = 0,
-                        FollowerCount = 0, FollowingCount = 0
-                    }, 
-                    
+                    },
+
                 };
                 
                 

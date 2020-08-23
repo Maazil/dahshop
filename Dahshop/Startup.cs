@@ -11,6 +11,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Dahshop.Data;
+using Dahshop.Models;
+using Dahshop.Controllers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +40,13 @@ namespace Dahshop
         public void ConfigureServices(IServiceCollection services)
         {
             
+            // Cookie policy 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            
             if (Environment.IsDevelopment()) // Database used during development
             {
                 // Register the database context as a service. Use the SQLite for this
@@ -48,20 +60,46 @@ namespace Dahshop
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             }
             
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
             
             services.AddControllersWithViews();
-            services.AddRazorPages();
+            //services.AddRazorPages();
+            
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddRazorPagesOptions(options =>
+                {
+                    //options.AllowAreas = true;
+                    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
+                    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
+                });
+            
+            
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
 
+            
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    
+                    options.ClientId = Configuration["App__GoogleClientId"];
+                    options.ClientSecret = Configuration["App__GoogleClientSecret"];
+                });
+
+            services.AddSingleton<IEmailSender, EmailSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //Use swagger to get a documentation on our API
-            app.UseStaticFiles();
+            //app.UseStaticFiles();
             
             // Options for static files. 
             var options = new StaticFileOptions {

@@ -6,7 +6,13 @@
     <title>@ViewData["Title"] - Dahshop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    
+    <!---------------  Google client id 
+    <meta name="google-signin-client_id" content="638005178418-1ikjpu4lmbisholct6qq3fsllo6v7nqg.apps.googleusercontent.com">
+    
+    ---------------->
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -34,6 +40,11 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+        
+        <!------------------   Google login button
+        <div class="g-signin2" data-onsuccess="onSignIn"></div>
+        ---------------->
+
     </div>
 
     <footer class="border-top footer text-muted">
@@ -41,9 +52,22 @@
             &copy; 2020 - Dahshop - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true" type="text/javascript" ></script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+
+    <!---------------  Google api library ---------------->
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
+@RenderSection("Scripts", required: false)
 </body>
 </html>

@@ -1,11 +1,14 @@
-﻿#if NETCOREAPP
+﻿
+using System.Collections.Generic;
+using System.Net.Mime;
+#if NETCOREAPP
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 #endif
 namespace Dahshop.Models
 {
     /// <summary>
-    /// Create Item data 
+    /// Create Item table 
     /// </summary>
     #if NETCOREAPP
     [Table("Items")]
@@ -41,18 +44,26 @@ namespace Dahshop.Models
             Sold
         }
         
+        public enum ItemCategories
+        {
+            Jeans,
+            Pants,
+            Jacket,
+            Sweater,
+            Hoodie,
+            Cardigan,
+            Skirt,
+            Dress,
+            Shoes,
+            Hats,
+            Accessories,
+            Makeup,
+            Bikini,
+            Shorts
+        }
+        
         // Item color
         public string ItemColor { get; set; }
-        
-        /*
-        // User who orders the item
-        #if NETCOREAPP
-        [NotMapped]
-        #endif
-        public AppUser AppUser { get; set; }
-        
-        public int CustomerId { get; set; }
-        */
-        
+
     }
 }

@@ -14,5 +14,12 @@ namespace Dahshop.Data
         
         // create set of users
         public DbSet<AppUser> AppUsers { get; set; }
+        
+        // Create set of items
+        public DbSet<Item> Items { get; set; }
+        
+        // Create set of orders
+        public DbSet<Order> Orders { get; set; }
+        
     }
 }
