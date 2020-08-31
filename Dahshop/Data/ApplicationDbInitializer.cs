@@ -25,7 +25,7 @@ namespace Dahshop.Data
             if (!development)
             {
                 //Migration is commented out since we do not have any yet.
-                db.Database.Migrate();
+                //db.Database.Migrate();
                 //return;
             }
             else
@@ -35,6 +35,24 @@ namespace Dahshop.Data
 
                 // Make sure the database and tables exist
                 db.Database.EnsureCreated();
+                
+                // Admin Role
+                var adminRole = new IdentityRole("Admin");
+                rm.CreateAsync(adminRole).Wait();
+
+                db.SaveChanges();
+
+                // Admin users
+                var admin = new IdentityUser
+                {
+                    UserName = "admin@uia.no", Email = "admin@uia.no", EmailConfirmed = true
+                };
+
+                um.CreateAsync(admin, "Password1.").Wait();
+                um.AddToRoleAsync(admin, "Admin").Wait();
+
+                // Save users
+                db.SaveChanges();
             }
             
         }
