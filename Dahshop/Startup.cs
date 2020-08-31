@@ -59,14 +59,15 @@ namespace Dahshop
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             }
-            
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultTokenProviders();
+
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
             
             services.AddControllersWithViews();
-            //services.AddRazorPages();
+            services.AddRazorPages();
             
+            /*
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddRazorPagesOptions(options =>
                 {
@@ -74,8 +75,7 @@ namespace Dahshop
                     options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
                     options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
                 });
-            
-            
+             
             services.ConfigureApplicationCookie(options =>
             {
                 options.LoginPath = $"/Identity/Account/Login";
@@ -83,23 +83,16 @@ namespace Dahshop
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
-            
-            services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    
-                    options.ClientId = Configuration["App__GoogleClientId"];
-                    options.ClientSecret = Configuration["App__GoogleClientSecret"];
-                });
-
             services.AddSingleton<IEmailSender, EmailSender>();
+            
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //Use swagger to get a documentation on our API
-            //app.UseStaticFiles();
+            app.UseStaticFiles();
             
             // Options for static files. 
             var options = new StaticFileOptions {

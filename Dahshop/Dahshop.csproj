@@ -31,4 +31,20 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\custom.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\favicon-16x16.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\favicon-32x32.png" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\index.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\oauth2-redirect.html" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui-bundle.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui-bundle.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui-standalone-preset.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui-standalone-preset.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui.css.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui.js.map" />
+  </ItemGroup>
+
 </Project>

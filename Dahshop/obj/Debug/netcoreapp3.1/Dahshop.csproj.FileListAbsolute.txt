@@ -169,8 +169,6 @@ C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.csproj.CopyComplete
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.dll
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.pdb
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.Google.dll
-C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.csproj.CoreCompileInputs.cache
-C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.genruntimeconfig.cache
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_RegisterPartial.cshtml.g.cs
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.SqlServer.dll
@@ -198,3 +196,5 @@ C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Acc
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\Account\_ViewImports.cshtml.g.cs
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ValidationScriptsPartial.cshtml.g.cs
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
+C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.csproj.CoreCompileInputs.cache
+C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.genruntimeconfig.cache

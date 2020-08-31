@@ -43,49 +43,16 @@ namespace Dahshop.Data
                 db.SaveChanges();
 
                 // Admin users
-                var admin = new IdentityUser();
-                admin.UserName = "admin@uia.no";
-                admin.Email = "admin@uia.no";
-                admin.EmailConfirmed = true;
-                
+                var admin = new IdentityUser
+                {
+                    UserName = "admin@uia.no", Email = "admin@uia.no", EmailConfirmed = true
+                };
+
                 um.CreateAsync(admin, "Password1.").Wait();
                 um.AddToRoleAsync(admin, "Admin").Wait();
 
                 // Save users
                 db.SaveChanges();
-                
-                // Look for users
-                if (db.AppUsers.Any())
-                {
-                    return;
-                }
-                
-                // Create users
-                var appUser = new AppUser[]
-                {
-                    
-                    new AppUser
-                    {
-                        FirstName = "Dah Dah", LastName = "Ry", PhoneNumber = "41272567",
-                        Email = "dahdahry@gmail.com", DeliveryPostAddress = "Svegeveien 2A", 
-                        DeliveryPostNumber = "4400", DeliveryPostPlace = "Flekkefjord", ItemSoldCount = 0,
-                        FollowerCount = 0, FollowingCount = 0
-                    }, 
-                    
-                    new AppUser
-                    {
-                        FirstName = "Ling", LastName = "Shing", PhoneNumber = "91378255",
-                        Email = "liishi@gmail.com", DeliveryPostAddress = "Innersvingen 5", 
-                        DeliveryPostNumber = "4289", DeliveryPostPlace = "Froland", ItemSoldCount = 0,
-                        FollowerCount = 0, FollowingCount = 0
-                    },
-
-                };
-                
-                
-                db.AppUsers.AddRange(appUser);
-                db.SaveChanges();
-
             }
             
         }

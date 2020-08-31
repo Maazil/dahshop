@@ -6,9 +6,6 @@
     "projectPath": "C:\\Coding\\dahshop\\Dahshop\\Dahshop.csproj",
     "outputPath": "C:\\Coding\\dahshop\\Dahshop\\obj\\",
     "projectStyle": "PackageReference",
-    "fallbackFolders": [
-      "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-    ],
     "originalTargetFrameworks": [
       "netcoreapp3.1"
     ],
