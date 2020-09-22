@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - Dahshop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/content.css" />
 </head>
 
 <body>
@@ -23,9 +24,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
+                        
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Content" asp-action="Content">Content</a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Vue" asp-action="Vue">Vue</a>
+                        </li>
+                        
                     </ul>
                 </div>
             </div>
@@ -54,6 +61,26 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+
+@{
+        var contextAction = (string)ViewContext.RouteData.Values["controller"];
+
+        if (contextAction != null){
+
+            if (contextAction.Equals("Content")){
+                <script src="~/js/imageLoader.js"></script>
+                <script src="~/js/clientToServerController.js"></script>
+            }
+
+            if (contextAction.Equals("Vue")){
+                <script src="~/js/addVueContent.js"></script>
+            }
+
+        }
+    }
+
+
 
 @RenderSection("Scripts", required: false)
 </body>

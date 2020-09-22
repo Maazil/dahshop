@@ -1,0 +1,63 @@
+﻿.C-center {
+    margin: auto;
+    width: 90%;
+    border: 6px solid #73AD21;
+    padding: 20px;
+}
+
+body{
+    font-family: 'Segoe UI', serif;
+    font-size: 12pt;
+}
+
+header h1{
+    font-size:12pt;
+    color: #fff;
+    background-color: #1BA1E2;
+    padding: 20px;
+
+}
+article
+{
+    width: 80%;
+    margin: 10px auto auto;
+}
+
+.thumbnail{
+    height: 100px;
+    margin: 10px;
+    float: left;
+}
+
+#clear{
+    display:none;
+}
+
+#result {
+    border: 4px dotted #cccccc;
+    display: none;
+    float: right;
+    margin:0 auto;
+    width: 511px;
+}
+
+.imageSize{
+    width: 480px;
+    height: 600px;
+}
+
+.crflbd{
+    color: black;
+    background-color: lightcoral;
+}
+
+.formLayout{
+    left: 10%;
+    width: 100%;
+}
+
+.descriptionBox{
+     left: auto;
+     width: 95%;
+     height: 90%;
+ }

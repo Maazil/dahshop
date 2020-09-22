@@ -53,6 +53,16 @@ namespace Dahshop.Data
 
                 // Save users
                 db.SaveChanges();
+                
+                
+                // Items
+                
+                var item1 = new Item(1, "Denim Jakke", "God høst jakke", "M",
+                    "Arendal", "Blå", "/resources/databaseFiles/items/1/matthew.jpg");
+
+                db.Add(item1);
+                db.SaveChanges();
+
             }
             
         }
