@@ -6,7 +6,7 @@ namespace Dahshop.Controllers
     public class VueController : Controller
     {
         
-        public IActionResult Vue()
+        public IActionResult Index()
         {
             return View();
         }

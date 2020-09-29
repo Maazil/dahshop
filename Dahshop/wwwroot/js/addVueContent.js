@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     new Vue({
-        el: '#app',
+        el: '#vue',
         data:{
             title: 'Hello World!',
             link : 'http://google.com',

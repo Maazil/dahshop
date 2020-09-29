@@ -1,6 +1,10 @@
 ﻿$(document).ready(function () {
     
-    let clientToServer = new clientToServerController();     
+    let clientToServer = new clientToServerController();
+
+    $('.necessaryInfo').text("(*) = needs to be filled").css('color','black');
+    $(".alert").css("visibility","hidden");
+    
     // Create vue instance
     var app = new Vue({
         el: '#app',
@@ -10,16 +14,16 @@
             items: [],
             item: {
                 id: 0,
-                ownerId: 0,
-                files: '',
-                filePath: '',
+                ownerId: '',
                 name: '',
-                description: '',
+                color: '',
                 size: '',
                 location: '',
-                color: '',
                 price: 0,
-            },
+                description: '',
+                files: '',
+                filePath: '',
+            }
 
 
         },
@@ -27,41 +31,82 @@
         computed: {},
 
         watch: {},
+        
+        created: function() {
+            
+            /************* Using the get-functions from ClientToServerController **************/
+            clientToServer.getItems(this);
+        },
 
         methods: {
 
             /*************** Call the add-functions from clientToServerController *****************/
 
-            /**
+            /*
              * Appends the item information to the FormData
              * and calls the postItem function from clientToServerController class
              */
 
-            addItem: function (event) {
-                let self = this;
-                
+            addItem: function(){
+                var self = this;
                 // Create a form data
                 let formData = new FormData();
-
-
-                for(let i = 0; i < self.item.files.length; i++ ){
+                
+                for(var i = 0; i < self.item.files.length; i++ ){
                     let file = this.item.files[i];
                     console.log(file);
                     formData.append('files', file);
                 }
 
                 formData.append('name',self.item.name);
-                formData.append('filePath',self.item.filePath);
+                console.log("Vue item name: " + self.item.name);
+                formData.append("color", self.item.color);
+                console.log("Color: " + self.item.color);
+                formData.append("size", self.item.size);
+                console.log("Size: " + self.item.size);
+                formData.append("location", self.item.location);
+                console.log(self.item.location);
+                formData.append("price", self.item.price);
+                console.log(self.item.price);
+                formData.append("description", self.item.description);
+                formData.append('filePath', self.item.filePath);
+                
+                console.log("Check data name: " + formData.get("name"));
+
                 clientToServer.postItem(formData, self);
                 
-                //self.items.files = this.$refs.items.files;
+            },
 
-            }
+            /*********************** File *************************/
 
-        }
-    });
+            //Checks if it's add or edit then sets the file into the item object
+            uploadItemFile: function(){
+                let self = this;
+                
+                // Check if files already exists
+                if (self.item.files === ""){
+                    // if files is empty set files
+                    self.item.files = this.$refs.itemFile.files;
+                }else {
+                    // Else empty the files first then add the new files
+                    self.item.files="";
+                    self.item.files = this.$refs.itemFile.files;
+                }
+            },
+            
+            
+            
+            
+            
 
-});
+        }//methods
+        
+        
+        
+        
+        
+    }); // vue app
+});//document ready
     
     
 /*

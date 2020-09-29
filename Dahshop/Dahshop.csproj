@@ -45,6 +45,8 @@
     <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui.css.map" />
     <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui.js" />
     <_ContentIncludedByDefault Remove="wwwroot\swagger\ui\swagger-ui.js.map" />
+    <_ContentIncludedByDefault Remove="wwwroot\resources\databaseFiles\items\4\akats.PNG" />
+    <_ContentIncludedByDefault Remove="wwwroot\resources\databaseFiles\items\4\sleep.PNG" />
   </ItemGroup>
 
 </Project>

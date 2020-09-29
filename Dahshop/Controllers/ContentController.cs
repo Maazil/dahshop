@@ -4,7 +4,7 @@ namespace Dahshop.Controllers
 {
     public class ContentController : Controller
     {
-        public IActionResult Content()
+        public IActionResult Index()
         {
             return View();
         }

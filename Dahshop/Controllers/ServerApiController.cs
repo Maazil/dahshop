@@ -1,8 +1,10 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Dahshop.Data;
 using Dahshop.Models;
 using Dahshop.Models.SendModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +25,7 @@ namespace Dahshop.Controllers
     {
         
         //String separator
-        private string _stringSeperator = ",";
+        //private string _stringSeperator = ",";
 
         //Database and user manager        
         private readonly ApplicationDbContext _db;
@@ -59,7 +61,7 @@ namespace Dahshop.Controllers
             //Get all materials
             var items = _db.Items;
                  
-            //Check if the materials exists, return 404 if it doesn't
+            //Check if the items exists, return 404 if it doesn't
             if (items == null)
                 return NotFound();
             
@@ -92,7 +94,6 @@ namespace Dahshop.Controllers
         
         
         
-        
         /*********************** POST *************************/
         
         /// <summary>
@@ -105,6 +106,11 @@ namespace Dahshop.Controllers
         ///     {
         ///        "id": 0,
         ///        "name": "Item 1",
+        ///        "color": "Red",
+        ///        "size": "M",
+        ///         "location": "Oslo",
+        ///         "price": "200",
+        ///         "description": "New",
         ///        "filePath": "",
         ///        "file": File
         ///     }
@@ -113,7 +119,7 @@ namespace Dahshop.Controllers
         /// <returns> The item that was added to the database.</returns>
         /// <param name="item">The item we are going to add.</param>
         /// <response code="200">Returns OK if everything works as intended</response>
-        /// <response code="400">If Id isn't 0</response>  
+        /// <response code="400">If Id isn't 0</response>
         [HttpPost("items")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -127,6 +133,8 @@ namespace Dahshop.Controllers
                 return BadRequest();
             }
             
+            Console.WriteLine("Item name: " + item.Name);
+
             //Check if the item model is valid 
             // If model was not valid. Then it is a bad request. 
             if (!ModelState.IsValid) return BadRequest();
@@ -151,11 +159,16 @@ namespace Dahshop.Controllers
                 
             //Add material to database and saves it
             _db.Add(item);
-            _db.SaveChanges(); 
-                
-            var newItem = new Item(item.ItemOwnerId, item.ItemName, item.ItemDescription, item.ItemSize, item.ItemLocation, item.ItemColor, item.FilePath)
+            _db.SaveChanges();
+
+            // Get user id from the user logged in
+            var user = _userManager.GetUserId(User);
+            Console.WriteLine("User Id: " + user + " - is logged in!");
+            
+            
+            var newItem = new Item(user, item.Name, item.Description, item.Size, item.Location, item.Color, item.Price, item.FilePath)
             {
-                Id = item.Id    
+                Id = item.Id,
             };
                 
             //Return the object back

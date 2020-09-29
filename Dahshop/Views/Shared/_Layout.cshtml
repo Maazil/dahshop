@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@using System.Diagnostics
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager;
+@inject UserManager<IdentityUser> UserManager;
+
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -21,18 +28,31 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
                         
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Content" asp-action="Content">Content</a>
-                        </li>
+                        @* Not logged in *@
+                        @if (!SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                        }
+                        
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Content" asp-action="Index">Content</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Vue" asp-action="Vue">Vue</a>
-                        </li>
-                        
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Vue" asp-action="Index">Vue</a>
+                            </li>
+                            
+                        }
+
                     </ul>
                 </div>
             </div>
@@ -60,25 +80,32 @@
     <script src="https://unpkg.com/axios/dist/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
 
 @{
-        var contextAction = (string)ViewContext.RouteData.Values["controller"];
+    var contextAction = (string)ViewContext.RouteData.Values["controller"];
 
-        if (contextAction != null){
+    if (contextAction != null){
 
-            if (contextAction.Equals("Content")){
-                <script src="~/js/imageLoader.js"></script>
-                <script src="~/js/clientToServerController.js"></script>
-            }
-
-            if (contextAction.Equals("Vue")){
-                <script src="~/js/addVueContent.js"></script>
-            }
-
+        if (contextAction.Equals("Home"))
+        {
+            <script src="~/js/clientToServerController.js"></script>
+            <script src="~/js/displayItems.js"></script>
         }
+        
+        if (contextAction.Equals("Content")){
+            <script src="~/js/clientToServerController.js"></script>
+            <script src="~/js/imageLoader.js"></script>
+        }
+        
+        if (contextAction.Equals("Vue")){
+            <script src="~/js/addVueContent.js"></script>
+        }
+        
+        
+        
     }
+}
 
 
 
