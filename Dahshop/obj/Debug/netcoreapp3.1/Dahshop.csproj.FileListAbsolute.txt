@@ -198,3 +198,5 @@ C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_Va
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Areas\Identity\Pages\_ViewImports.cshtml.g.cs
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.csproj.CoreCompileInputs.cache
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.genruntimeconfig.cache
+C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Views\Content\Index.cshtml.g.cs
+C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Razor\Views\Vue\Index.cshtml.g.cs

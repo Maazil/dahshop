@@ -35,26 +35,69 @@ namespace Dahshop.Data
 
                 // Make sure the database and tables exist
                 db.Database.EnsureCreated();
-                
+            }
+
+
+            if (!db.Items.Any(s => s.Name.Equals("TestItem")))
+            {
                 // Admin Role
                 var adminRole = new IdentityRole("Admin");
                 rm.CreateAsync(adminRole).Wait();
-
+                
                 db.SaveChanges();
-
+                
                 // Admin users
-                var admin = new IdentityUser
-                {
-                    UserName = "admin@uia.no", Email = "admin@uia.no", EmailConfirmed = true
-                };
-
+                var admin = new IdentityUser();
+                admin.UserName = "admin@uia.no";
+                admin.Email = "admin@uia.no";
+                admin.EmailConfirmed = true;
+                
                 um.CreateAsync(admin, "Password1.").Wait();
                 um.AddToRoleAsync(admin, "Admin").Wait();
 
                 // Save users
                 db.SaveChanges();
-            }
+                
+                // New user
+                var user1 = new IdentityUser();
+                user1.UserName = "mkling@uia.no";
+                user1.Email = "mkling@uia.no";
+                user1.EmailConfirmed = true;
+
+                um.CreateAsync(user1, "Password1.").Wait();
+
+                db.SaveChanges();
+
+
+                // Add test Item
+                var item1 = new Item(
+                    admin.Id, 
+                    "Denim Jakke",
+                    "Blå", 
+                    "M",
+                    "Arendal", 
+                    "500", 
+                    "God høst jakke",
+                    "/resources/databaseFiles/items/1/matthew.jpg");
+
+                db.Add(item1);
+                db.SaveChanges();
+                
+                var item2 = new Item(
+                    user1.Id,
+                    "Jeans",
+                    "Svart",
+                    "164", 
+                    "Oslo",
+                    "200",
+                    "Lite brukt jeans",
+                    "/resources/databaseFiles/items/2/undying.png");
+                
+                db.Add(item2);
+                db.SaveChanges();
+
+            }// If !Any items
             
-        }
+        }// Initialize
     }
 }

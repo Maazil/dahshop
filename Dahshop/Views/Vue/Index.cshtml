@@ -1,0 +1,78 @@
+﻿
+<div id="vue">
+    
+    <p v-once>{{ title }}</p>
+    
+    <hr/>
+    
+    <p>{{ sayHello() }} - <a v-bind:href="link">Google</a></p>
+    
+    <hr>
+    
+    <p v-html="finishedLink"></p>
+    
+    <hr>
+    
+    <p> Vue JS is really cool - {{ name }} ({{ age }})</p>
+    
+     <hr>
+        
+    <p> Age = {{ age*3 }} </p>
+    
+     <hr>
+        
+    <p> Random number between 0 and 1: {{ generateRN() }} </p>
+    
+    <hr>
+    
+    <div>
+        <img v-bind:src="imageLink">
+    </div>
+    
+    <hr>
+    
+    <div>
+        <input type="text" v-bind:value="name"/>
+    </div>
+    
+    <hr>
+    
+    <button v-on:click="increase(2, $event)">Click me</button>
+    <p>{{ counter }}</p>
+    <p v-on:mousemove="updateCoordinates">
+        Coordinates: {{ x }} / {{ y }}
+        - <span v-on:mousemove.stop="">DEAD SPOT</span>
+    </p>
+    <input type="text" v-on:keyup.enter.space="alertMe"/>
+    
+    <hr>
+    
+    <button v-on:click="alert"> Alert </button>
+    
+    <hr>
+    
+    <div>
+        <input type="text" v-on:keydown="store"/>
+        <p>{{ value }}</p>
+    </div>
+    
+    <hr>
+    
+    <div>
+        <p>Current value: {{ newVal }}</p>
+        <button v-on:click="newVal += 5"> Add 5 </button>
+        <button v-on:click="newVal += 1"> Add 1 </button>
+        <p>{{ output }}</p>
+        
+    </div>
+    
+     
+    <hr>
+    
+    <div>
+        <input type="text"/>
+        <p>{{ newVal }}</p>
+        
+    </div>
+    
+</div>
