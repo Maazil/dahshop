@@ -12,11 +12,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Dahshop</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/content.css" />
+    
+    @*
+        Scripts and links from the build of Vue CLI
+    *@
+    <link rel="icon" href="~/dist/favicon.ico" />
+    <link href="~/dist/css/app.fb0c6e1c.css" rel="preload" as="style" />
+    <link href="~/dist/js/app.ebb43e49.js" rel="preload" as="script" />
+    <link href="~/dist/js/chunk-vendors.1320bd74.js" rel="preload" as="script" />
+    <link href="~/dist/css/app.fb0c6e1c.css" rel="stylesheet" />
 </head>
 
 <body>
+    
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
@@ -41,16 +49,7 @@
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Content" asp-action="Index">Content</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Vue" asp-action="Index">Vue</a>
-                            </li>
-                            
+                            </li>                            
                         }
 
                     </ul>
@@ -58,6 +57,13 @@
             </div>
         </nav>
     </header>
+
+    <noscript
+      ><strong
+        >We're sorry but vue-project doesn't work properly without JavaScript
+        enabled. Please enable it to continue.</strong
+      ></noscript>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -77,17 +83,13 @@
 
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://unpkg.com/axios/dist/axios.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" defer></script>
-    
-    <!--            
-            Use Vue3 when devtools is working   
-    <script src="https://unpkg.com/vue@next" defer></script>
-    -->
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>    
+             
+            @* Use Vue3 when devtools is working   
+    <script src="https://unpkg.com/vue@next" defer></script> *@
 
 
-
-
+@*
 @{
     var contextAction = (string)ViewContext.RouteData.Values["controller"];
 
@@ -111,7 +113,7 @@
         
         
     }
-}
+} *@
 
 
 

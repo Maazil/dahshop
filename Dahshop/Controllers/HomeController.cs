@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Dahshop.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dahshop.Controllers
 {
