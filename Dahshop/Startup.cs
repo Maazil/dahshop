@@ -67,25 +67,7 @@ namespace Dahshop
             services.AddControllersWithViews();
             services.AddRazorPages();
             
-            /*
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-                .AddRazorPagesOptions(options =>
-                {
-                    //options.AllowAreas = true;
-                    options.Conventions.AuthorizeAreaFolder("Identity", "/Account/Manage");
-                    options.Conventions.AuthorizeAreaPage("Identity", "/Account/Logout");
-                });
-             
-            services.ConfigureApplicationCookie(options =>
-            {
-                options.LoginPath = $"/Identity/Account/Login";
-                options.LogoutPath = $"/Identity/Account/Logout";
-                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-            });
-
-            services.AddSingleton<IEmailSender, EmailSender>();
             
-            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,6 +96,7 @@ namespace Dahshop
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
             app.UseHttpsRedirection();
             
             // Added the static options to the static files handler. 
