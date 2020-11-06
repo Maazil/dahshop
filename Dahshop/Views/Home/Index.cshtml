@@ -1,12 +1,18 @@
-﻿@{
+﻿@using System.Diagnostics
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager;
+@inject UserManager<IdentityUser> UserManager;
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div id="app"></div>
+    <div id="app"></div>
 
 @*
     Import the necessary scripts from the Vue build
 *@
 
-<script src="~/dist/js/chunk-vendors.1320bd74.js"></script>
-<script src="~/dist/js/app.ebb43e49.js"></script>
+<script src="~/dist/js/chunk-vendors.aed42874.js"></script>
+<script src="~/dist/js/app.21bb0990.js"></script>

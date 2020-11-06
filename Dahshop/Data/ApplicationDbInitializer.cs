@@ -72,26 +72,31 @@ namespace Dahshop.Data
                 // Add test Item
                 var item1 = new Item(
                     admin.Id, 
-                    "Denim Jakke",
-                    "Blå", 
-                    "M",
-                    "Arendal", 
+                    "Spring dress",
+                    "Hvit", 
+                    "S",
+                    "Kristiansand", 
                     "500", 
-                    "God høst jakke",
-                    "/resources/databaseFiles/items/1/matthew.jpg");
+                    "Fin dress for vår",
+                    "/resources/databaseFiles/items/1/flora-dress1.jpg," +
+                    "/resources/databaseFiles/items/1/flora-dress2.jpg," +
+                    "/resources/databaseFiles/items/1/flora-dress3.jpg," +
+                    "/resources/databaseFiles/items/1/flora-dress4.jpg");
 
                 db.Add(item1);
                 db.SaveChanges();
                 
                 var item2 = new Item(
                     user1.Id,
-                    "Jeans",
-                    "Svart",
-                    "164", 
+                    "Høst hoodie",
+                    "Gul",
+                    "M", 
                     "Oslo",
                     "200",
-                    "Lite brukt jeans",
-                    "/resources/databaseFiles/items/2/undying.png");
+                    "Brukt hoodie",
+                    "/resources/databaseFiles/items/2/Hoodie1.jpg," +
+                    "/resources/databaseFiles/items/2/Hoodie2.jpg," +
+                    "/resources/databaseFiles/items/2/Hoodie3.jpg");
                 
                 db.Add(item2);
                 db.SaveChanges();
