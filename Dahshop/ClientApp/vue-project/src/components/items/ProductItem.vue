@@ -2,11 +2,11 @@
     <div>
         <li>
             <h3>{{ name }}</h3>
-            <p>{{ color }}</p>
-            <p>{{ size }}</p>
-            <h4>{{ price }} kr</h4>
-            <p>{{ location }}</p>
-            <p>{{ description }}</p>
+            <p>Color: {{ color }}</p>
+            <p>Size: {{ size }}</p>
+            <p>Location: {{ location }}</p>
+            <h4>Price: {{ price }} kr</h4>
+            <p> Description: {{ description }}</p>
             <div>
                 <base-button mode="outline">View details</base-button>
             </div>

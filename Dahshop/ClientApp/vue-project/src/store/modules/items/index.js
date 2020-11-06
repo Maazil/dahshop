@@ -10,21 +10,25 @@ export default {
             items: [
                 {
                     id: 1,
+                    ownerId: 'Matty',
                     name: 'Vintage Jacket',
                     color: 'Brown',
                     size: 'M',
-                    price: 400,
                     location: 'Oslo',
-                    description: 'New unused jacket'
+                    price: 400,
+                    description: 'New unused jacket',
+                    filePath: ''
                 },
                 {
                     id: 2,
+                    ownerId: 'Admin',
                     name: 'Ripped jeans',
                     color: 'Blue',
                     size: '164',
-                    price: 340,
                     location: 'Kristiansand',
-                    description: 'Used jeans in good state'
+                    price: 340,
+                    description: 'Used jeans in good state',
+                    filePath: ''
                 }
             ]
         };

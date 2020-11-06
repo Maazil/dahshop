@@ -18,10 +18,7 @@ export default {
     TheHeader,
   },
   setup(){
-
-    return {  };
-
-  },
+  },  
 };
 </script>
 

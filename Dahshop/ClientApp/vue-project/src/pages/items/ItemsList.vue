@@ -4,16 +4,17 @@
     <section>
       <base-card>
         <div class="controls">
-          <base-button mode="outline">Refresh</base-button>
+          <base-button mode="outline" @click.prevent="refreshItems">Refresh</base-button>
           <base-button link to="/">Register as user</base-button>
         </div>
         <ul v-if="hasItems">
           <product-item
-            v-for="item in filteredItems"
+            v-for="item in allItems"
             :key="item.id"
             :id="item.id"
             :name="item.name"
             :size="item.size"
+            :color="item.color"
             :location="item.location"
             :price="item.price"
             :description="item.description"
@@ -26,45 +27,71 @@
 </template>
 
 <script>
+import { useStore } from "vuex";
+import { computed } from "vue";
 import ProductItem from "../../components/items/ProductItem.vue";
 
 export default {
   components: {
     ProductItem,
   },
-  data() {
-    return {
-      isLoading: false,
-      error: null,
-    };
+
+  setup() {
+    // set store as constant and then use it
+    const store = useStore();
+
+    // Send get request for all items
+    store.dispatch("items/getItems");
+
+    // store all items
+    const allItems = computed(function() {
+      return store.getters["items/items"];
+    });
+
+    // check if state has items
+    const hasItems = computed(function() {
+      return store.getters["items/hasItems"];
+    });
+
+    function refreshItems() {
+      return store.dispatch("items/getItems") && console.log('All new items gotten');
+    }
+
+    // expose the variables to the template
+    return { allItems, hasItems, refreshItems };
   },
-  computed: {
-    filteredItems() {
-      return this.$store.getters["items/items"];
-    },
-    hasItems() {
-      return !this.isLoading && this.$store.getters["items/hasItems"];
-    },
-  },
-  created() {
-    // this.loadCoaches();
-  },
-  methods: {
-    // async loadCoaches(refresh = false) {
-    //   this.isLoading = true;
-    //   try {
-    //     await this.$store.dispatch("coaches/loadCoaches", {
-    //       forceRefresh: refresh,
-    //     });
-    //   } catch (error) {
-    //     this.error = error.message || "Something went wrong";
-    //   }
-    //   this.isLoading = false;
-    // },
-    handleError() {
-      this.error = null;
-    },
-  },
+
+  // data() {
+  //   return {
+  //     isLoading: false,
+  //     error: null,
+  //   };
+  // },
+  // computed: {
+  //   hasItems() {
+  //   },
+  // },
+
+  // created(){
+  //   this.$store.dispatch('getAllItems');
+  // },
+
+  // methods: {
+  //   // async loadCoaches(refresh = false) {
+  //   //   this.isLoading = true;
+  //   //   try {
+  //   //     await this.$store.dispatch("coaches/loadCoaches", {
+  //   //       forceRefresh: refresh,
+  //   //     });
+  //   //   } catch (error) {
+  //   //     this.error = error.message || "Something went wrong";
+  //   //   }
+  //   //   this.isLoading = false;
+  //   // },
+  //   handleError() {
+  //     this.error = null;
+  //   },
+  // },
 };
 </script>
 
