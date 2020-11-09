@@ -2,7 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import ItemsList from './pages/items/ItemsList.vue';
-import ItemRegistration from './pages/postitem/ItemRegistration.vue';
+import ItemRegistration from './pages/items/ItemRegistration.vue';
 import NotFound from './pages/NotFound.vue';
 
 const router = createRouter({
