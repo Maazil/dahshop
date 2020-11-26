@@ -8,29 +8,28 @@
       @change="setDataURL"
       multiple
     />
-    <div v-if="imageList.length > 0">
-      <ul v-for="(image, index) in imageList" :key="index">
-        <li>
-          <!-- {{ index }} -->
-          <img class="imagePreview" id="imgs" :src="imageList[index]" />
-        </li>
-      </ul>
-    </div>
+    <ul v-if="imageList.length > 0">
+      <li v-for="(image, index) in imageList" :key="index">
+        <!-- {{ index }} -->
+        <img class="imagePreview" id="imgs" :src="imageList[index]" />
+      </li>
+    </ul>
     <p v-else>List of images empty</p>
   </section>
 </template>
 
 <script>
-// import { ref } from "vue";
 export default {
-  // store / expose data and functions
-  setup() {
-    // Image list store
-    const imageList = [];
-
-    function setDataURL(event) {
+  data() {
+    return {
+      imageList: [],
+    };
+  },
+  methods: {
+    setDataURL(event) {
       // set image list to an empty array just in case
       this.imageList = [];
+      console.log(this.imageList.length);
 
       // Reference to the DOM input elements
       const files = event.target.files;
@@ -45,17 +44,17 @@ export default {
           console.log(file);
 
           // set the current index in imagelist to an object url
-          this.imageList[i] = URL.createObjectURL(file);
+          this.imageList.push(URL.createObjectURL(file));
+          // this.imageList[i] = URL.createObjectURL(file);
 
-        //   // Revoke the file to free memory
-        //   URL.revokeObjectURL(this.imageList[i]);
+          //   // Revoke the file to free memory
+          //   URL.revokeObjectURL(this.imageList[i]);
         }
       }
 
       console.log(this.imageList);
-    } // function Preview
-
-    return { setDataURL, imageList };
+      console.log(this.imageList.length);
+    },
   },
 };
 </script>
