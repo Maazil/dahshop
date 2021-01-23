@@ -3,26 +3,7 @@ import axios from "axios";
 export default {
   getItems(context) {
     try {
-      axios.get('api/server/items').then(function(response) {
-        // check if the response is okay
-        
-        // const items = [];
-
-        // for(const key in response.data){
-        //     const item = {
-        //         id: key.id,
-        //         ownerId: response.data[key].ownerId,
-        //         name: response.data[key].name,
-        //         color: response.data[key].color,
-        //         size: response.data[key].size,
-        //         location: response.data[key].location,
-        //         price: response.data[key].price,
-        //         description: response.data[key].description,
-        //         filePath: response.data[key].filePath
-        //     };
-        //     items.push(item);
-        // }
-
+      axios.get("api/server/items").then(function(response) {
         context.commit("setItems", response.data);
         console.log("Response: " + JSON.stringify(response.data));
       });
@@ -32,4 +13,31 @@ export default {
       console.log(error);
     }
   },
+
+  postItem(context, formdata) {
+    try {
+      axios
+        .post("api/server/items", formdata, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then(function (response) {
+          context.commit("addItem", response.data);
+          console.log("Item successfully posted to database");
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+  setFiles(context, data) {
+    try {
+      context.commit("setFiles", data);
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+
 };
