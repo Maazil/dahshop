@@ -120,6 +120,7 @@ namespace Dahshop.Controllers
         /// <param name="item">The item we are going to add.</param>
         /// <response code="200">Returns OK if everything works as intended</response>
         /// <response code="400">If Id isn't 0</response>
+        [Authorize]
         [HttpPost("items")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -1,6 +1,5 @@
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\appsettings.Development.json
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\appsettings.json
-C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\Dahshop.StaticWebAssets.xml
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\app.db
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\Dahshop.exe
@@ -200,3 +199,4 @@ C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.csproj.CoreCompileInpu
 C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\Dahshop.genruntimeconfig.cache
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\ClientApp\vue-project\package-lock.json
 C:\Coding\dahshop\Dahshop\bin\Debug\netcoreapp3.1\ClientApp\vue-project\package.json
+C:\Coding\dahshop\Dahshop\obj\Debug\netcoreapp3.1\scopedcss\bundle\Dahshop.styles.css

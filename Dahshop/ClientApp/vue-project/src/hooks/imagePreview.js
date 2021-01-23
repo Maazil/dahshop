@@ -1,9 +1,17 @@
 import { ref } from "vue";
+import { useStore } from "vuex";
 
 export default function useImagePreview() {
+  const store = useStore();
+
+  // One to use for preview in browser
+  // One to store the image files to send as formdata
   const imageList = ref([]);
 
   function setDataURL(event) {
+
+    let imageListToSendToState = [];
+
     // set image list to an empty array just in case
     imageList.value = [];
 
@@ -19,11 +27,17 @@ export default function useImagePreview() {
 
         // console.log(file);
 
+        imageListToSendToState.push(file);
+
         // set the current index in imagelist to an object url
         imageList.value.push(URL.createObjectURL(file));
       }
     }
 
+    console.log(imageListToSendToState);
+
+    // Add image files to store
+    store.dispatch("items/setFiles", imageListToSendToState);
   }
 
   function revokeDataURL(index) {

@@ -5,10 +5,11 @@
     </section>
     <section>
       <form @submit.prevent="submitForm">
-        <div class="form-control" :class="{ invalid: !state.itemName.isValid }">
+        <div class="form-group" :class="{ invalid: !state.itemName.isValid }">
           <label for="itemname">Item name</label>
           <input
             type="text"
+            class="form-control"
             id="itemname"
             v-model.trim="state.itemName.val"
             @blur="clearValidity('itemName')"
@@ -16,13 +17,11 @@
           <p v-if="!state.itemName.isValid">Item name must not be empty</p>
         </div>
 
-        <div
-          class="form-control"
-          :class="{ invalid: !state.itemColor.isValid }"
-        >
+        <div class="form-group" :class="{ invalid: !state.itemColor.isValid }">
           <label for="itemcolor">Color</label>
           <input
             type="text"
+            class="form-control"
             id="itemcolor"
             v-model.trim="state.itemColor.val"
             @blur="clearValidity('itemColor')"
@@ -30,10 +29,11 @@
           <p v-if="!state.itemColor.isValid">Item color must not be empty</p>
         </div>
 
-        <div class="form-control" :class="{ invalid: !state.itemSize.isValid }">
+        <div class="form-group" :class="{ invalid: !state.itemSize.isValid }">
           <label for="itemsize">Size</label>
           <input
             type="text"
+            class="form-control"
             id="itemsize"
             v-model.trim="state.itemSize.val"
             @blur="clearValidity('itemSize')"
@@ -42,12 +42,13 @@
         </div>
 
         <div
-          class="form-control"
+          class="form-group"
           :class="{ invalid: !state.itemLocation.isValid }"
         >
           <label for="itemlocation">Location</label>
           <input
             type="text"
+            class="form-control"
             id="itemlocation"
             v-model.trim="state.itemLocation.val"
             @blur="clearValidity('itemLocation')"
@@ -57,13 +58,11 @@
           </p>
         </div>
 
-        <div
-          class="form-control"
-          :class="{ invalid: !state.itemPrice.isValid }"
-        >
+        <div class="form-group" :class="{ invalid: !state.itemPrice.isValid }">
           <label for="itemprice">Price (NOK)</label>
           <input
             type="number"
+            class="form-control"
             id="itemprice"
             v-model.trim="state.itemPrice.val"
             @blur="clearValidity('itemPrice')"
@@ -72,12 +71,13 @@
         </div>
 
         <div
-          class="form-control"
+          class="form-group"
           :class="{ invalid: !state.itemDescription.isValid }"
         >
           <label for="itemdescription">Description (additional info)</label>
           <textarea
             placeholder="New? Used? If so, then how long?"
+            class="form-control"
             id="itemdescription"
             rows="5"
             v-model.trim="state.itemDescription.val"
@@ -96,17 +96,25 @@
 </template>
 
 <script>
-import { reactive } from "vue";
-import FileReader from '../items/FileReader.vue';
+import { reactive, computed, ref } from "vue";
+import FileReader from "../items/FileReader.vue";
+import { useStore } from "vuex";
 
 export default {
-  components:{
-    FileReader
+  components: {
+    FileReader,
   },
 
   setup() {
-    // store the data
+    // use store
+    const store = useStore();
+
+    // Store the files uploaded
+    const images = ref([]);
+
+    // store the item data
     const state = reactive({
+      Id: 0,
       itemName: {
         val: "",
         isValid: true,
@@ -131,10 +139,7 @@ export default {
         val: "",
         isValid: true,
       },
-      itemFiles: {
-        val: "",
-        isValid: true,
-      },
+      filePath: "",
       formIsValid: true,
     }); // state const
 
@@ -172,66 +177,66 @@ export default {
       }
     } // end of validate form function
 
+
+    function getImages() {
+
+      const allFiles = computed(function() {
+        return store.getters["items/files"];
+      });
+
+      images.value = allFiles.value;
+    }
+
     function submitForm() {
+      // Validate the form first
       this.validateForm();
 
+      // If the form is not valid return
       if (!state.formIsValid) return;
+
+      getImages();
+
+      // var FormData = require('form-data');
+      var fdata = new FormData();
+
+      const files = images.value;
+
+      // console.log("List of images: " + files);
+
+      for (var i = 0; i < files.length; i++) {
+        let file = files[i];
+        console.log(file);
+        fdata.append("files", file);
+      }
+
+      fdata.append("name", state.itemName.val);
+      fdata.append("color", state.itemColor.val);
+      fdata.append("size", state.itemSize.val);
+      fdata.append("location", state.itemLocation.val);
+      fdata.append("price", state.itemPrice.val);
+      fdata.append("description", state.itemDescription.val);
+      // fdata.append("filePath", state.filePath);
+      // clientToServer.addStructure(formData, self);
+
+      // console.log(fdata);
+
+      store.dispatch("items/postItem", fdata);
 
       console.log("Form has been submitted");
     } // end of submit form func
 
-    return { state, clearValidity, validateForm, submitForm };
+    return {
+      state,
+      images,
+      clearValidity,
+      validateForm,
+      submitForm,
+    };
   },
 };
 </script>
 
 <style scoped>
-.form-control {
-  margin: 1rem 0;
-}
-
-label {
-  font-weight: bold;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-input[type="checkbox"] + label {
-  font-weight: normal;
-  display: inline;
-  margin: 0 0 0 0.5rem;
-}
-
-input,
-textarea {
-  display: block;
-  width: 100%;
-  border: 1px solid #ccc;
-  font: inherit;
-}
-
-input:focus,
-textarea:focus {
-  background-color: #f0e6fd;
-  outline: none;
-  border-color: #3d008d;
-}
-
-input[type="checkbox"] {
-  display: inline;
-  width: auto;
-  border: none;
-}
-
-input[type="checkbox"]:focus {
-  outline: #3d008d solid 1px;
-}
-
-h3 {
-  margin: 0.5rem 0;
-  font-size: 1rem;
-}
-
 .invalid label {
   color: red;
 }

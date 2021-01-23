@@ -78,10 +78,10 @@ namespace Dahshop.Data
                     "Kristiansand", 
                     "500", 
                     "Fin dress for vår",
-                    "/resources/databaseFiles/items/1/flora-dress1.jpg," +
-                    "/resources/databaseFiles/items/1/flora-dress2.jpg," +
-                    "/resources/databaseFiles/items/1/flora-dress3.jpg," +
-                    "/resources/databaseFiles/items/1/flora-dress4.jpg");
+                    "/resources/databaseFiles/items/1/flora-dress1.jpg");
+                    // "/resources/databaseFiles/items/1/flora-dress2.jpg," +
+                    // "/resources/databaseFiles/items/1/flora-dress3.jpg," +
+                    // "/resources/databaseFiles/items/1/flora-dress4.jpg");
 
                 db.Add(item1);
                 db.SaveChanges();

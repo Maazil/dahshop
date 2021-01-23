@@ -1,7 +1,7 @@
 <template>
     <section>
         <base-card>
-        <h2 class="center">Post an item!</h2>
+        <h3 class="center">Post an item!</h3>
         <item-form></item-form>
         </base-card>
     </section>
