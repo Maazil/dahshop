@@ -157,17 +157,20 @@ namespace Dahshop.Controllers
                 return BadRequest();
             }
 
-                
+            // Set ownerId to the item
+            // Get user id from the user logged in
+            var user = _userManager.GetUserId(User);
+            Console.WriteLine("User Id: " + user + " - is logged in!");
+
+            item.OwnerId = user;
+
             //Add material to database and saves it
             _db.Add(item);
             _db.SaveChanges();
 
-            // Get user id from the user logged in
-            var user = _userManager.GetUserId(User);
-            Console.WriteLine("User Id: " + user + " - is logged in!");
             
             
-            var newItem = new Item(user, item.Name, item.Description, item.Size, item.Location, item.Color, item.Price, item.FilePath)
+            var newItem = new Item(user, item.Name, item.Color, item.Size, item.Location, item.Price, item.Description, item.FilePath)
             {
                 Id = item.Id,
             };

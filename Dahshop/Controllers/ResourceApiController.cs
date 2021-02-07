@@ -113,28 +113,20 @@ namespace Dahshop.Controllers
                     if (fileExtension == "jpg" || fileExtension == "jpeg" || fileExtension == "png" )
                     {
                         // The filepath we use to retrieve it. The one in database
-                        fileUrl += url + "/" + id+'/'+ id + "." + fileExtension+',';
+                        fileUrl += url + "/" + id+'/'+ f.FileName+',';
                         
                         // The actual filepath. 
-                        var specialFilePath = directoryPath + "/"+ id + "." + fileExtension;
+                        var filePath = directoryPath + "/"+ f.FileName;
                         
                         //Copy the file with a file stream. 
-                        using (var stream = System.IO.File.Create(specialFilePath))
+                        using (var stream = System.IO.File.Create(filePath))
                         {
                             await f.CopyToAsync(stream);
                         }
                     }
-                    
-                    // The filepath we use to retrieve it. The one in database
-                    fileUrl += url + "/" + id+'/'+ f.FileName+',';
-                    
-                    // The actual filepath. 
-                    var filePath = directoryPath + "/"+ f.FileName;
-                    
-                    //Copy the file with a file stream. 
-                    using (var stream = System.IO.File.Create(filePath))
+                    else
                     {
-                        await f.CopyToAsync(stream);
+                        Console.WriteLine("File type is not accepted");
                     }
                     
                 }            
