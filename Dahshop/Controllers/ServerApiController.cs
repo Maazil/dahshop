@@ -64,7 +64,7 @@ namespace Dahshop.Controllers
             //Check if the items exists, return 404 if it doesn't
             if (items == null)
                 return NotFound();
-            
+
             return Ok(items);
         }
         

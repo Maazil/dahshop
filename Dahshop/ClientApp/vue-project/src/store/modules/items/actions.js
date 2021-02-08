@@ -4,7 +4,7 @@ export default {
   getItems(context) {
     try {
       axios.get("api/server/items").then(function(response) {
-        context.commit("setItems", response.data);
+        context.commit("setItems", response.data.reverse());
         console.log("Response: " + JSON.stringify(response.data));
       });
     } catch (error) {

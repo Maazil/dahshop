@@ -4,7 +4,7 @@
     <input
       type="file"
       id="files"
-      accept="image/*"
+      accept="image/jpg, image/jpeg, image/x-png"
       @change="setDataURL"
       multiple
     />

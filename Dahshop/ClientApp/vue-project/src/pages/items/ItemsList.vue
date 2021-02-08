@@ -60,38 +60,6 @@ export default {
     // expose the variables to the template
     return { allItems, hasItems, refreshItems };
   },
-
-  // data() {
-  //   return {
-  //     isLoading: false,
-  //     error: null,
-  //   };
-  // },
-  // computed: {
-  //   hasItems() {
-  //   },
-  // },
-
-  // created(){
-  //   this.$store.dispatch('getAllItems');
-  // },
-
-  // methods: {
-  //   // async loadCoaches(refresh = false) {
-  //   //   this.isLoading = true;
-  //   //   try {
-  //   //     await this.$store.dispatch("coaches/loadCoaches", {
-  //   //       forceRefresh: refresh,
-  //   //     });
-  //   //   } catch (error) {
-  //   //     this.error = error.message || "Something went wrong";
-  //   //   }
-  //   //   this.isLoading = false;
-  //   // },
-  //   handleError() {
-  //     this.error = null;
-  //   },
-  // },
 };
 </script>
 
