@@ -58,7 +58,7 @@ namespace Dahshop.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetAllItems()
         {
-            //Get all materials
+            //Get all items
             var items = _db.Items;
                  
             //Check if the items exists, return 404 if it doesn't
@@ -82,10 +82,10 @@ namespace Dahshop.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetItem(int id)
         {
-            //Search for the given structure
+            //Search for the given item
             var item = _db.Items.Find(id);
                  
-            //Check if the structure exists, return 404 if it doesn't
+            //Check if the item exists, return 404 if it doesn't
             if (item == null)
                 return NotFound();
             
@@ -126,7 +126,7 @@ namespace Dahshop.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> PostItem([FromForm] SendItem item)
         {
-            //Check if the material have another id then 0
+            //Check if the Item have another id then 0
             if (item.Id != 0)
             {
                 //If it is, id is something else tell them something is wrong. 
@@ -157,14 +157,14 @@ namespace Dahshop.Controllers
                 return BadRequest();
             }
 
-            // Set ownerId to the item
             // Get user id from the user logged in
             var user = _userManager.GetUserId(User);
             Console.WriteLine("User Id: " + user + " - is logged in!");
 
+            // Set ownerId to the item
             item.OwnerId = user;
 
-            //Add material to database and saves it
+            //Add item to database and saves it
             _db.Add(item);
             _db.SaveChanges();
 
