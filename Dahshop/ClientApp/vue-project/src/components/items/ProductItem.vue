@@ -47,12 +47,12 @@ export default {
       
       // Split the filepaths into an array of image files
       const splitFilepath = props.filePath.split(',');
-      console.log(splitFilepath);
+      // console.log(splitFilepath);
 
       // Store the array 
       const imageList = ref(splitFilepath);
 
-      console.log(imageList.value.length);
+      // console.log(imageList.value.length);
 
       // Variable to store selected index of array
       const selectedIndex = ref(0);
@@ -67,13 +67,9 @@ export default {
 
       // Set the image file based on index
       function setSelectedImage(index){
-        console.log("Selected image file " + imageList.value[index]);
+        // console.log("Selected image file " + imageList.value[index]);
         return imageList.value[index];
       }
-
-      // const getImage = computed(function() {
-      //    return img_src.value;
-      // });
 
       return { imageList, img_src, selectedIndex, chooseImage, setSelectedImage }
 
