@@ -7,20 +7,18 @@
 
             <div class="container">
               <div class="row justify-content-md-center">
-                <div class="col-md-auto">
+                <div class="col-md-auto ratio ratio-4x5">
                   <img :src="setSelectedImage(selectedIndex)" width="300" height="375">
                 </div>
               </div>
 
-              <div class="col" v-if="imageList.length > 1">
-                  <button @click="choosePrevImage">
-                    <img src="images\arrow-left.png" alt="left" width="40" height="35">
-                  </button>
-                  <button @click="chooseNextImage">
-                    <img src="images\arrow-right.png" alt="right" width="40" height="35">
+              <ul v-if="imageList.length > 1" class="row justify-content-md-center">
+                <div class="col-{breakpoint}-auto" v-for="(image, indx) in imageList" :key="indx">
+                  <button class="ratio ratio-4x5" @click="chooseImage(indx)">
+                    <img :src="image" alt="thumbnail" width="40" height="50">
                   </button>
                 </div>
-
+              </ul>
 
             </div>
 
@@ -62,24 +60,9 @@ export default {
       // Variable to use as source for the selected image
       const img_src = ref("");
 
-      // Choose the prev image
-      function choosePrevImage(){
-        if(selectedIndex.value != 0){
-          // console.log("Current index: " + selectedIndex.value);
-          selectedIndex.value--;
-          console.log("Previous image chosen! Index: " + selectedIndex.value);
-          // setSelectedImage();
-        }
-      }
-
-      // Choose the next image
-      function chooseNextImage(){
-        if(selectedIndex.value != imageList.value.length-1){
-          // console.log("Current index: " + selectedIndex.value);
-          selectedIndex.value++;
-          console.log("Next image chosen! Index: " + selectedIndex.value);
-          // setSelectedImage();
-        }
+      // Choose the image based on index
+      function chooseImage(index){
+          selectedIndex.value = index;
       }
 
       // Set the image file based on index
@@ -92,7 +75,7 @@ export default {
       //    return img_src.value;
       // });
 
-      return { imageList, img_src, selectedIndex, choosePrevImage, chooseNextImage, setSelectedImage }
+      return { imageList, img_src, selectedIndex, chooseImage, setSelectedImage }
 
     }
 }
@@ -122,5 +105,10 @@ div {
 .actions {
   display: flex;
   justify-content: flex-end;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
 }
 </style>
