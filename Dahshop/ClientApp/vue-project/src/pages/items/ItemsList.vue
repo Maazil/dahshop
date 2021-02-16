@@ -18,6 +18,7 @@
             :location="item.location"
             :price="item.price"
             :description="item.description"
+            :filePath="item.filePath"
           ></product-item>
         </ul>
         <h3 v-else>No items found</h3>
