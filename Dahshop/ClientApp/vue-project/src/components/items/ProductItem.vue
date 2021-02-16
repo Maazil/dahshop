@@ -12,13 +12,13 @@
                 </div>
               </div>
 
-              <ul v-if="imageList.length > 1" class="row justify-content-md-center">
+              <div v-if="imageList.length > 1" class="row justify-content-center">
                 <div class="col-{breakpoint}-auto" v-for="(image, indx) in imageList" :key="indx">
                   <button class="ratio ratio-4x5" @click="chooseImage(indx)">
                     <img :src="image" alt="thumbnail" width="40" height="50">
                   </button>
                 </div>
-              </ul>
+              </div>
 
             </div>
 
