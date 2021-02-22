@@ -1,10 +1,13 @@
 <template>
   <div>
-    <section>
-      <file-reader></file-reader>
-    </section>
-    <section>
       <form @submit.prevent="submitForm">
+        <div class="form-group" :class="{ invalid: !state.itemFiles.isValid }">
+          <file-reader></file-reader>
+          <p v-if="!state.itemFiles.isValid" @blur="clearValidity('itemFiles')">
+            You cannot post without pictures! <br> 
+            Remember to upload files of the item!
+          </p>
+        </div>
         <div class="form-group" :class="{ invalid: !state.itemName.isValid }">
           <label for="itemname">Item name</label>
           <input
@@ -91,14 +94,15 @@
 
         <base-button>Register item</base-button>
       </form>
-    </section>
   </div>
 </template>
 
 <script>
-import { reactive, computed, ref } from "vue";
 import FileReader from "../items/FileReader.vue";
+
+import { reactive, computed } from "vue";
 import { useStore } from "vuex";
+import { useRouter } from 'vue-router';
 
 export default {
   components: {
@@ -109,12 +113,16 @@ export default {
     // use store
     const store = useStore();
 
-    // Store the files uploaded
-    const images = ref([]);
+    // use Router
+    const router = useRouter();
 
     // store the item data
     const state = reactive({
       Id: 0,
+      itemFiles: {
+        val: [],
+        isValid: true,
+      },
       itemName: {
         val: "",
         isValid: true,
@@ -150,6 +158,12 @@ export default {
     function validateForm() {
       // set formIsValid to true as default
       state.formIsValid = true;
+
+      //Check that there are images uploaded
+      if(!state.itemFiles.val.length){
+        state.itemFiles.isValid = false;
+        state.formIsValid = false;
+      }
       // check form validity and set state
       if (state.itemName.val === "") {
         state.itemName.isValid = false;
@@ -177,57 +191,90 @@ export default {
       }
     } // end of validate form function
 
-
     function getImages() {
 
+      // Retrieve the files from store
       const allFiles = computed(function() {
         return store.getters["items/files"];
       });
 
-      images.value = allFiles.value;
+      // Check if files array is not empty
+      if(!allFiles.value.length){
+        state.itemFiles.isValid = false;
+        // console.log("There are no files!!!");
+        return {
+          error: true,
+          message: "There are no files!"
+        };
+      }
+
+      // Set the files in state
+      state.itemFiles.val = allFiles.value;
     }
 
+
     function submitForm() {
+
+      // Get the images uploaded
+      getImages();
+
       // Validate the form first
-      this.validateForm();
+      validateForm();
 
       // If the form is not valid return
       if (!state.formIsValid) return;
 
-      getImages();
-
-      // var FormData = require('form-data');
+      // Create a formdata, used to send the item info to backend
       var fdata = new FormData();
 
-      const files = images.value;
+      // Store files in variable for easier looping
+      const files = state.itemFiles.val;
 
-      // console.log("List of images: " + files);
-
+      // add the files to formdata
       for (var i = 0; i < files.length; i++) {
+        
+        // Get the file of the index
         let file = files[i];
-        console.log(file);
+
+        // Check that file is not empty
+        if(file === null){
+          console.log("File index " + i + " is empty!");
+          break;
+        }
+
+        // Add file to formdata
         fdata.append("files", file);
       }
 
+      // Add data to formdata
       fdata.append("name", state.itemName.val);
       fdata.append("color", state.itemColor.val);
       fdata.append("size", state.itemSize.val);
       fdata.append("location", state.itemLocation.val);
       fdata.append("price", state.itemPrice.val);
       fdata.append("description", state.itemDescription.val);
-      // fdata.append("filePath", state.filePath);
-      // clientToServer.addStructure(formData, self);
 
-      // console.log(fdata);
-
+      // Send the formdata
       store.dispatch("items/postItem", fdata);
 
       console.log("Form has been submitted");
+
+      alert("Item has been posted! :)");
+
+      // Refresh the page content so the newest item is first
+      store.dispatch("items/getItems");
+
+      // Always clear files in store, to remove duplicate files bug. 
+      //See documentation
+      store.commit("items/clearFiles");
+
+      // Redirect to main page
+      router.push('/');
+
     } // end of submit form func
 
     return {
       state,
-      images,
       clearValidity,
       validateForm,
       submitForm,
@@ -242,6 +289,7 @@ export default {
 }
 
 .invalid input,
+.invalid p,
 .invalid textarea {
   border: 1px solid red;
 }
