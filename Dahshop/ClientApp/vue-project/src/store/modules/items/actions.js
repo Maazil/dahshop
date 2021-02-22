@@ -19,7 +19,7 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(function (response) {
+        .then(function(response) {
           context.commit("addItem", response.data);
           console.log("Item successfully posted to database");
         });
@@ -35,6 +35,4 @@ export default {
       console.log(error);
     }
   },
-
-
 };

@@ -8,21 +8,29 @@
       @change="setDataURL"
       multiple
     />
-    <ul v-if="imageList.length > 0">
-      <li v-for="(image, index) in imageList" :key="index">
-        <img class="imagePreview" id="imgs" :src="image" @load="revokeDataURL(index)" />
-      </li>
-    </ul>
-    <p v-else>No images selected</p>
+    <div class="justify-content-center">
+      <div
+        class="col-{breakpoint}-auto"
+        v-for="(image, index) in imageList"
+        :key="index"
+      >
+        <img
+          class="imagePreview"
+          id="imgs"
+          :src="image"
+          @load="revokeDataURL(index)"
+        /> <br>
+      </div>
+    </div>
+    <!-- <p v-else>No images selected</p> -->
   </section>
 </template>
 
 <script>
-import useImagePreview from '../../hooks/imagePreview.js';
+import useImagePreview from "../../hooks/imagePreview.js";
 
 export default {
   setup() {
-    
     const { imageList, setDataURL, revokeDataURL } = useImagePreview();
 
     return { imageList, setDataURL, revokeDataURL };

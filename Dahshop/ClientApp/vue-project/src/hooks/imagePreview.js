@@ -34,7 +34,7 @@ export default function useImagePreview() {
       }
     }
 
-    console.log(imageListToSendToState);
+    // console.log(imageListToSendToState);
 
     // Add image files to store
     store.dispatch("items/setFiles", imageListToSendToState);
