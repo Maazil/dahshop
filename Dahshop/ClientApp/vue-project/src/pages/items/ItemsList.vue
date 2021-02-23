@@ -5,7 +5,6 @@
       <base-card>
         <div class="controls">
           <base-button mode="outline" @click.prevent="refreshItems">Refresh</base-button>
-          <base-button link to="/">Register as user</base-button>
         </div>
         <ul v-if="hasItems">
           <product-item
@@ -73,6 +72,6 @@ ul {
 
 .controls {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
 }
 </style>
