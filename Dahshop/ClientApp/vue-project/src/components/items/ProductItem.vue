@@ -30,11 +30,11 @@
 
         <transition name="fade-button" mode="out-in">
           <div class="container" v-if="detailsAreVisible">
-            <p>Color: {{ color }}</p>
-            <p>Size: {{ size }}</p>
-            <p>Location: {{ location }}</p>
-            <h4>Price: {{ price }} kr</h4>
-            <p>Description: {{ description }}</p>
+            <p><strong>Color: </strong>{{ color }}</p>
+            <p><strong>Size: </strong>{{ size }}</p>
+            <p><strong>Location: </strong>{{ location }}</p>
+            <h4>Price: {{ price }} KR</h4>
+            <p><strong>Description: </strong>{{ description }}</p>
           </div>
         </transition>
         <div>
@@ -88,12 +88,12 @@ export default {
     // Data for checking if details button is clicked
     const detailsAreVisible = ref(false);
 
-    // Toggle details button between visible and hidden
-    // Set the visibility to the opposite of the current state
+    // Show details button to visible
     function showDetails() {
       detailsAreVisible.value = true;
     }
 
+    // Hide details button to visible
     function hideDetails() {
       detailsAreVisible.value = false;
     }
@@ -106,7 +106,7 @@ export default {
       setSelectedImage,
       detailsAreVisible,
       showDetails,
-      hideDetails
+      hideDetails,
     };
   },
 };
@@ -118,6 +118,10 @@ li {
   border: 1px solid #424242;
   border-radius: 12px;
   padding: 1rem;
+}
+
+p {
+  font-style: sans-serif;
 }
 
 h3 {
@@ -149,7 +153,7 @@ img {
   transform: translateY(20px);
 }
 
-.v-leave-active, 
+.v-leave-active,
 .v-enter-active {
   transition: all 0.3s ease-out;
 }
@@ -160,25 +164,21 @@ img {
   transform: translateY(0);
 }
 
-
 .fade-button-enter-from,
 .fade-button-leave-to {
   opacity: 0;
 }
 
 .fade-button-enter-active {
-  transition: opacity 0.2s ease-out;
+  transition: opacity 0.3s ease-out;
 }
 
-.fade-button-leave-active{
-  transition: opacity 0.3s ease-in;
+.fade-button-leave-active {
+  transition: opacity 0.25s ease-in;
 }
 
 .fade-button-enter-to,
 .fade-button-leave-from {
   opacity: 1;
 }
-
-
-
 </style>
