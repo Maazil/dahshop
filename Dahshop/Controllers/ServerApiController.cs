@@ -29,7 +29,7 @@ namespace Dahshop.Controllers
 
         //Database and user manager        
         private readonly ApplicationDbContext _db;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ResourceApiController _rs;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Dahshop.Controllers
         /// </summary>
         /// <param name="db">The database context you want it to use.</param>
         /// <param name="userManager">The user manager it is going to use.</param>
-        public ServerApiController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
+        public ServerApiController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _userManager = userManager;
@@ -158,11 +158,11 @@ namespace Dahshop.Controllers
             }
 
             // Get user id from the user logged in
-            var user = _userManager.GetUserId(User);
+            var user = await _userManager.GetUserAsync(User);
             Console.WriteLine("User Id: " + user + " - is logged in!");
 
             // Set ownerId to the item
-            item.OwnerId = user;
+            item.OwnerId = user.Id;
 
             //Add item to database and saves it
             _db.Add(item);

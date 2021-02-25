@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Dahshop.Data;
+using Dahshop.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -26,7 +27,7 @@ namespace Dahshop
                 var db = services.GetRequiredService<ApplicationDbContext>();
                 
                 // Get the UserManager and RoleManager also from the service provider
-                var um = services.GetRequiredService<UserManager<IdentityUser>>();
+                var um = services.GetRequiredService<UserManager<ApplicationUser>>();
                 var rm = services.GetRequiredService<RoleManager<IdentityRole>>();
 
                 // Get the environment so we can check if this is running in development or otherwise

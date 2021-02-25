@@ -17,7 +17,7 @@ namespace Dahshop.Data
         /// <param name="um"> User Manager </param>
         /// <param name="rm"> Role Manager </param>
         /// <param name="development"> In development bool</param>
-        public static void Initialize(ApplicationDbContext db, UserManager<IdentityUser> um,
+        public static void Initialize(ApplicationDbContext db, UserManager<ApplicationUser> um,
             RoleManager<IdentityRole> rm, bool development)
         {
             
@@ -46,8 +46,8 @@ namespace Dahshop.Data
                 
                 db.SaveChanges();
                 
-                // Admin users
-                var admin = new IdentityUser();
+                // Admin user
+                var admin = new ApplicationUser();
                 admin.UserName = "admin@uia.no";
                 admin.Email = "admin@uia.no";
                 admin.EmailConfirmed = true;
@@ -57,26 +57,69 @@ namespace Dahshop.Data
 
                 // Save users
                 db.SaveChanges();
-                
+
                 // New user
-                var user1 = new IdentityUser();
-                user1.UserName = "mkling@uia.no";
-                user1.Email = "mkling@uia.no";
-                user1.EmailConfirmed = true;
+                var matthew = new ApplicationUser("Matthew", "Ling", 0, 0, 0, new List<ApplicationUser>(), new List<ApplicationUser>())
+                {
+                    UserName = "mkling@uia.no",
+                    Email = "mkling@uia.no",
+                    EmailConfirmed = true,
+                    PhoneNumber = "41378793",
+                    PhoneNumberConfirmed = true
+                };
+                
+                um.CreateAsync(matthew, "Password1.").Wait();
+                // Save user
+                db.SaveChanges();
 
-                um.CreateAsync(user1, "Password1.").Wait();
 
+                // Dah dah User
+                var dahdah = new ApplicationUser("Dah Dah", "Ry", 0, 0, 0, new List<ApplicationUser>(), new List<ApplicationUser>())
+                {
+                    UserName = "dahdah@uia.no",
+                    Email = "dahdah@uia.no",
+                    EmailConfirmed = true
+                };
+                
+                um.CreateAsync(dahdah, "Password1.").Wait();
+                // Save user
+                db.SaveChanges();
+
+
+                // Lawnar user
+                var lawnar = new ApplicationUser("Lawnar", "Ry", 0, 0, 0, new List<ApplicationUser>(), new List<ApplicationUser>())
+                {
+                    UserName = "lawnar@uia.no",
+                    Email = "lawnar@uia.no",
+                    EmailConfirmed = true
+                };
+                
+                um.CreateAsync(lawnar, "Password1.").Wait();
+                // Save user
+                db.SaveChanges();
+
+
+                // Cabriella user
+                var cabriella = new ApplicationUser("Cabriella", "Sein Ya", 0, 0, 0, new List<ApplicationUser>(), new List<ApplicationUser>())
+                {
+                    UserName = "cabriella@uia.no",
+                    Email = "cabriella@uia.no",
+                    EmailConfirmed = true
+                };
+                
+                um.CreateAsync(cabriella, "Password1.").Wait();
+                // Save user
                 db.SaveChanges();
 
 
                 // Add test Item
                 var item1 = new Item(
-                    admin.Id, 
+                    admin,
                     "Spring dress",
-                    "Hvit", 
+                    "Hvit",
                     "S",
-                    "Kristiansand", 
-                    "500", 
+                    "Kristiansand",
+                    "500",
                     "Fin dress for vår",
                     "/resources/databaseFiles/items/1/flora-dress1.jpg");
                     // "/resources/databaseFiles/items/1/flora-dress2.jpg," +
@@ -87,7 +130,7 @@ namespace Dahshop.Data
                 db.SaveChanges();
                 
                 var item2 = new Item(
-                    user1.Id,
+                    matthew,
                     "Høst hoodie",
                     "Gul",
                     "M", 

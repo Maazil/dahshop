@@ -39,8 +39,10 @@ namespace Dahshop.Models
         
         // Item description
         public string Description { get; set; }
-        
-        
+
+        // Is item a favorite
+        public bool IsFavorite { get; set; }
+
         // Status of item sold or not
         public enum ItemStatus
         {
@@ -103,9 +105,9 @@ namespace Dahshop.Models
         /// <param name="color">Item color</param>
         /// <param name="price">Item price</param>
         /// <param name="filePath">The filepath of the item</param>
-        public Item(string ownerId, string name, string color, string size, string location,  string price, string description, string filePath)
+        public Item(ApplicationUser user, string name, string color, string size, string location,  string price, string description, string filePath)
         {
-            OwnerId = ownerId;
+            OwnerId = user.Id;
             Name = name;
             Color = color;
             Size = size;
