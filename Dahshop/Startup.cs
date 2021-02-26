@@ -82,8 +82,8 @@ namespace Dahshop
             };
             
             // Need one key pair for all file types we want to use when loading static files. 
-            ((FileExtensionContentTypeProvider)options.ContentTypeProvider).Mappings.Add(
-                new KeyValuePair<string, string>(".3ds", "text/plain"));
+            // ((FileExtensionContentTypeProvider)options.ContentTypeProvider).Mappings.Add(
+            //     new KeyValuePair<string, string>(".3ds", "text/plain"));
             
             if (env.IsDevelopment())
             {

@@ -112,15 +112,88 @@ namespace Dahshop.Data
                 db.SaveChanges();
 
 
+                // Add categories
+                var jeans = new Category("Jeans");
+                db.Add(jeans);
+                db.SaveChanges();
+
+                var pants = new Category("Pants");
+                db.Add(pants);
+                db.SaveChanges();
+
+                var shorts = new Category("Shorts");
+                db.Add(shorts);
+                db.SaveChanges();
+
+                var underwear = new Category("Underwear");
+                db.Add(underwear);
+                db.SaveChanges();
+
+                var jacket = new Category("Jacket");
+                db.Add(jacket);
+                db.SaveChanges();
+
+                var tshirt = new Category("T-shirt");
+                db.Add(tshirt);
+                db.SaveChanges();
+
+                var sweater = new Category("Sweater");
+                db.Add(sweater);
+                db.SaveChanges();
+
+                var hoodie = new Category("Hoodie");
+                db.Add(hoodie);
+                db.SaveChanges();
+
+                var dress = new Category("Dress");
+                db.Add(dress);
+                db.SaveChanges();
+
+                var suit = new Category("Suit");
+                db.Add(suit);
+                db.SaveChanges();
+
+                var shoes = new Category("Shoes");
+                db.Add(shoes);
+                db.SaveChanges();
+
+                var hats = new Category("Hats");
+                db.Add(hats);
+                db.SaveChanges();
+
+                var accessories = new Category("Accessories");
+                db.Add(accessories);
+                db.SaveChanges();
+
+                var makeup = new Category("Makeup");
+                db.Add(makeup);
+                db.SaveChanges();
+
+                var swimsuit = new Category("Swimsuit");
+                db.Add(swimsuit);
+                db.SaveChanges();
+
+
+                var workout = new Category("Workout");
+                db.Add(workout);
+                db.SaveChanges();
+
+                var vintage = new Category("Vintage");
+                db.Add(vintage);
+                db.SaveChanges();
+
+
                 // Add test Item
                 var item1 = new Item(
-                    admin,
+                    dahdah,
                     "Spring dress",
                     "Hvit",
                     "S",
                     "Kristiansand",
                     "500",
                     "Fin dress for vår",
+                    "H&M",
+                    dress,
                     "/resources/databaseFiles/items/1/flora-dress1.jpg");
                     // "/resources/databaseFiles/items/1/flora-dress2.jpg," +
                     // "/resources/databaseFiles/items/1/flora-dress3.jpg," +
@@ -129,7 +202,7 @@ namespace Dahshop.Data
                 db.Add(item1);
                 db.SaveChanges();
                 
-                var item2 = new Item(
+                var nikeHoodie = new Item(
                     matthew,
                     "Høst hoodie",
                     "Gul",
@@ -137,11 +210,30 @@ namespace Dahshop.Data
                     "Oslo",
                     "200",
                     "Brukt hoodie",
+                    "Nike",
+                    hoodie,
                     "/resources/databaseFiles/items/2/Hoodie1.jpg," +
                     "/resources/databaseFiles/items/2/Hoodie2.jpg," +
                     "/resources/databaseFiles/items/2/Hoodie3.jpg");
                 
-                db.Add(item2);
+                db.Add(nikeHoodie);
+                db.SaveChanges();
+
+
+                var redsuit = new Item(
+                    cabriella,
+                    "Red Velvet suit",
+                    "Red",
+                    "S", 
+                    "Kristiansand",
+                    "700",
+                    "Fin rød suit, brukt 1 gang",
+                    "Zalando",
+                    suit,
+                    "/resources/databaseFiles/items/3/red1.jpg," +
+                    "/resources/databaseFiles/items/3/red2.jpg");
+                
+                db.Add(redsuit);
                 db.SaveChanges();
 
             }// If !Any items
