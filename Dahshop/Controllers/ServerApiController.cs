@@ -79,16 +79,16 @@ namespace Dahshop.Controllers
         [HttpGet("useritems")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetAllItemsFromUser()
+        public IActionResult GetUserItems(string userid)
         {
 
             // Get the user
-            var user = _userManager.GetUserId(User);
+            // var user = _userManager.GetUserId(User);
 
-            Console.WriteLine("Get user id: " + user);
+            // Console.WriteLine("Get user id: " + user);
 
             //Get all items
-            var items = _db.Items.Where(i => i.Owner.Id == user);
+            var items = _db.Items.Where(i => i.Owner.Id == userid);
 
             //Check if the items exists, return 404 if it doesn't
             if (items == null)
