@@ -8,15 +8,15 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dahshop.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options): base(options){}
         
+        // Users
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
         // Create set of items
         public DbSet<Item> Items { get; set; }
-        
-        // Create set of orders
-        public DbSet<Order> Orders { get; set; }
         
     }
 }

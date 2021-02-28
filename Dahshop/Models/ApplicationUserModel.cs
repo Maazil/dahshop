@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
 #if NETCOREAPP
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -23,22 +25,21 @@ namespace Dahshop.Models
         [Column(TypeName = "nvarchar(100)")]
         public string LastName { get; set; }
 
-
-        // -------------  Delivery information  ---------------
-
-        
-        // Address of Customer to be delivered to
-        public string DeliveryPostAddress { get; set; }
-        
-        // Post Number of Customer to be delivered to, 4 Digits
-        public string DeliveryPostNumber { get; set; }
-        
-        // Town of Customer to be delivered to
-        public string DeliveryPostPlace { get; set; }
-        
-        
         
         // ------------------  Profile data  ------------------
+
+        // File for profile picture
+        [NotMapped]
+        public IFormFile ProfilePicture { get; set; }
+
+        // File path for profile pitcure
+        public string ProfilePictureFilePath{ get; set; }
+
+        // User rating from other users
+        public int UserRating { get; set; }
+
+        // Count of items posted 
+        public int ItemPostedCount { get; set; }
         
         // Count of items sold 
         public int ItemSoldCount { get; set; }
@@ -49,6 +50,14 @@ namespace Dahshop.Models
         // Count of people following
         public int FollowingCount { get; set; }
 
+        // List of followers of this user
+        [NotMapped]
+        public List<ApplicationUser> listOfUserFollowers{ get;set; }
+
+        // List of users this user is following
+        [NotMapped]
+        public List<ApplicationUser> listOfUsersFollowing{ get;set; }
+
 
         /// <summary>
         /// Empty constructor for User
@@ -57,9 +66,8 @@ namespace Dahshop.Models
         {
             FirstName = "";
             LastName = "";
-            DeliveryPostAddress = "";
-            DeliveryPostNumber = "";
-            DeliveryPostPlace = "";
+            UserRating = 0;
+            ItemPostedCount = 0;
             ItemSoldCount = 0;
             FollowerCount = 0;
             FollowingCount = 0;
@@ -71,25 +79,18 @@ namespace Dahshop.Models
         /// </summary>
         /// <param name="firstName"> First Name(s) of User </param>
         /// <param name="lastName"> Phone Number of User </param>
-        /// <param name="deliveryPostAddress"> Address of User to be delivered to </param>
-        /// <param name="deliveryPostNumber"> Post Number of User to be delivered to, 4 Digits </param>
-        /// <param name="deliveryPostPlace"> Town of User to be delivered to </param>
         /// <param name="itemSoldCount"> Count of items sold </param>
         /// <param name="followerCount"> Follower count of User </param>
         /// <param name="followingCount"> Following count of User </param>
-        public ApplicationUser(string firstName, string lastName,
-            string deliveryPostAddress, string deliveryPostNumber, 
-            string deliveryPostPlace, int itemSoldCount,
-            int followerCount, int followingCount)
+        public ApplicationUser(string firstName, string lastName, int userRating, int itemPostedCount, int itemSoldCount, List<ApplicationUser> followers, List<ApplicationUser> following)
         {
             FirstName = firstName;
             LastName = lastName;
-            DeliveryPostAddress = deliveryPostAddress;
-            DeliveryPostNumber = deliveryPostNumber;
-            DeliveryPostPlace = deliveryPostPlace;
+            UserRating = userRating;
+            ItemPostedCount = itemPostedCount;
             ItemSoldCount = itemSoldCount;
-            FollowerCount = followerCount;
-            FollowingCount = followingCount;
+            FollowerCount = followers.Count;
+            FollowingCount = following.Count;
         }
 
     }

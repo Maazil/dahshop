@@ -1,8 +1,7 @@
 ﻿@using System.Diagnostics
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager;
-@inject UserManager<IdentityUser> UserManager;
-
+@inject SignInManager<ApplicationUser> SignInManager;
+@inject UserManager<ApplicationUser> UserManager;
 
 
 <!DOCTYPE html>
@@ -26,21 +25,19 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        
-                        @* Not logged in *@
-                        @if (!SignInManager.IsSignedIn(User))
-                        {
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                        }
+                    <ul class="navbar-nav flex-grow-1">                        
                         
                         @if (SignInManager.IsSignedIn(User))
                         {
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>                            
+                        }
+                        @* Not logged in *@
+                        else{
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Home</a>
+                            </li>
                         }
 
                     </ul>

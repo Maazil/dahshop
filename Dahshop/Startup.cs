@@ -60,7 +60,7 @@ namespace Dahshop
                     options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             }
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             
@@ -82,8 +82,8 @@ namespace Dahshop
             };
             
             // Need one key pair for all file types we want to use when loading static files. 
-            ((FileExtensionContentTypeProvider)options.ContentTypeProvider).Mappings.Add(
-                new KeyValuePair<string, string>(".3ds", "text/plain"));
+            // ((FileExtensionContentTypeProvider)options.ContentTypeProvider).Mappings.Add(
+            //     new KeyValuePair<string, string>(".3ds", "text/plain"));
             
             if (env.IsDevelopment())
             {

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-
+using System.Data;
 
 namespace Dahshop.Controllers
 {
@@ -29,7 +29,7 @@ namespace Dahshop.Controllers
 
         //Database and user manager        
         private readonly ApplicationDbContext _db;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ResourceApiController _rs;
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Dahshop.Controllers
         /// </summary>
         /// <param name="db">The database context you want it to use.</param>
         /// <param name="userManager">The user manager it is going to use.</param>
-        public ServerApiController(ApplicationDbContext db, UserManager<IdentityUser> userManager)
+        public ServerApiController(ApplicationDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _userManager = userManager;
@@ -61,6 +61,35 @@ namespace Dahshop.Controllers
             //Get all items
             var items = _db.Items;
                  
+            //Check if the items exists, return 404 if it doesn't
+            if (items == null)
+                return NotFound();
+
+            return Ok(items);
+        }
+
+
+        /// <summary>
+        ///  GET - All Items from the user logged in
+        /// </summary>
+        /// <returns> Selected items from the database.</returns>
+        /// <response code="200">Returns OK if everything works as intended</response>
+        /// <response code="404">If the item doesn't exist</response>  
+        [Authorize]
+        [HttpGet("useritems")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetUserItems(string userid)
+        {
+
+            // Get the user
+            // var user = _userManager.GetUserId(User);
+
+            // Console.WriteLine("Get user id: " + user);
+
+            //Get all items
+            var items = _db.Items.Where(i => i.Owner.Id == userid);
+
             //Check if the items exists, return 404 if it doesn't
             if (items == null)
                 return NotFound();
@@ -158,22 +187,22 @@ namespace Dahshop.Controllers
             }
 
             // Get user id from the user logged in
-            var user = _userManager.GetUserId(User);
-            Console.WriteLine("User Id: " + user + " - is logged in!");
+            var user = await _userManager.GetUserAsync(User);
+            Console.WriteLine("User: " + user.UserName + " - is logged in!");
 
             // Set ownerId to the item
-            item.OwnerId = user;
+            item.OwnerId = user.Id;
 
             //Add item to database and saves it
             _db.Add(item);
             _db.SaveChanges();
 
-            
-            
-            var newItem = new Item(user, item.Name, item.Color, item.Size, item.Location, item.Price, item.Description, item.FilePath)
+
+
+            var newItem = new Item(user, item.Name, item.Color, item.Size, item.Location, item.Price, item.Description, item.BrandName, item.Category, item.FilePath)
             {
                 Id = item.Id,
-            };
+        };
                 
             //Return the object back
             return Ok(newItem);
